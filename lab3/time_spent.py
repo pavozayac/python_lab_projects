@@ -1,12 +1,17 @@
 time_map: dict[str, list[int]] = dict()
 
+# If the command is not any of the options, the program just asks again
 cmd = input('Please input the command: a for adding an activity time, s for showing activities, t for top 3 and e for exit.\n')
 
 while cmd != 'e':
     match cmd:
         case 'a':
             name: str = input('Activity name: ')
-            time: int = int(input('Time spent: '))
+            try:
+                time: int = int(input('Time spent: '))
+            except ValueError:
+                print('Time spent needs to be an integer value. \n')
+                continue
 
             if name in time_map:
                 time_map[name].append(time)
