@@ -3,17 +3,32 @@ from typing import Iterable
 def _mt(num: int, a: Iterable):
     i = iter(a)
 
-    yield from make_tree(num, i)
+    return make_tree(num, i)
+
+def yield_single(f, *args, **kwargs):
+    yield tuple(f(*args, **kwargs))
 
 def make_tree(num: int, a: Iterable):
-    if num != 0:
-        yield make_tree(num // 2, a)
+    if num > 1:
+        # l = yield from make_tree(num - 2, a)
+        yield from yield_single(make_tree, num // 2, a)
 
-        yield next(a) 
+        # b = next(a)
+        # print(b)
 
-        yield make_tree(num // 2, a)
+        # print('n ', next(a))
+        yield next(a)
+
+        # right = list(make_tree(num // 2, a))
+        # yield right
+        # yield from make_tree(num // 2, a)
+        yield from yield_single(make_tree, num // 2, a)
+
     else:
         yield None
+        yield next(a)
+        yield None
+        # yield None
     
     
 
@@ -23,9 +38,11 @@ def walk(tree: Iterable, preorder: bool, inorder: bool, postorder: bool):
     if tree is None:
         return
     else:
+        tree = iter(tree)
         left = next(tree)
         middle = next(tree)
         right = next(tree)
+
         if preorder:
             print(middle)
 
@@ -39,6 +56,8 @@ def walk(tree: Iterable, preorder: bool, inorder: bool, postorder: bool):
         if postorder:
             print(middle)
 
-print(list(_mt(7, "alakota")))
+print(list(_mt(3, "ala")))
+# print(list(list(_mt(3, "ala"))[0]))
+print(list(_mt(7, 'alakota')))
 
-print(walk(_mt(7, "alakota"), False, True, False))
+walk(_mt(7, 'alakota'), False, True, False)
