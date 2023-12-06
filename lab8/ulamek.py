@@ -39,7 +39,7 @@ class Fraction:
         return Fraction(self.numerator*other.denominator + other.numerator*self.denominator, self.denominator * other.denominator)
 
     def __sub__(self, other):
-        return Fraction(self.numerator*other.denominator - other.numerator*self.numerator, self.denominator * other.denominator)
+        return Fraction(self.numerator*other.denominator - other.numerator*self.denominator, self.denominator * other.denominator)
     
     def __mul__(self, other):
         return Fraction(self.numerator * other.numerator, self.denominator * other.denominator)
