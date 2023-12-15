@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod, abstractproperty
+from abc import ABC, abstractmethod
 from json import dump, load
 
 class Item(ABC):
@@ -14,9 +14,6 @@ class Item(ABC):
     
 class Book(Item):
     def __init__(self, title, creator, year, genre, isbn):
-        # self.title = title
-        # self.creator = creator
-        # self.year = year
         super().__init__(title, creator, year)
         self.genre = genre
         self.isbn = isbn
@@ -28,13 +25,12 @@ class Book(Item):
         if not isinstance(__value, self.__class__):
             return False
         
-        return self.title == __value.title and self.creator == __value.creator and self.year == __value.year and self.genre == __value.genre and self.isbn == __value.isbn
+        return self.title == __value.title and self.creator == __value.creator \
+            and self.year == __value.year and self.genre == __value.genre \
+            and self.isbn == __value.isbn
 
 class Movie(Item):
     def __init__(self, title, creator, year, genre, duration):
-        # self.title = title
-        # self.creator = creator
-        # self.year = year
         super().__init__(title, creator, year)
         self.genre = genre
         self.duration = duration
@@ -46,7 +42,9 @@ class Movie(Item):
         if not isinstance(__value, self.__class__):
             return False
         
-        return self.title == __value.title and self.creator == __value.creator and self.year == __value.year and self.genre == __value.genre and self.duration == __value.duration
+        return self.title == __value.title and self.creator == __value.creator \
+            and self.year == __value.year and self.genre == __value.genre \
+            and self.duration == __value.duration
     
 class Library:
     def __init__(self) -> None:
