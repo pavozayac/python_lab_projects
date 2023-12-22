@@ -1,4 +1,7 @@
 */.*
 jup
 *.ipynb
-_
+__pycache__
+.pytest*
+.venv
+.vscode
